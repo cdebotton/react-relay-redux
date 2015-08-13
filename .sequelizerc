@@ -1,0 +1,9 @@
+require('babel/register')({
+  stage: 0,
+});
+
+module.exports = {
+  'models-path': './data/models',
+  'migrations-path': './data/migrations',
+  'config': './config/db.json'
+};

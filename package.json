@@ -33,6 +33,7 @@
     "webpack-dev-server": "^1.10.1"
   },
   "dependencies": {
+    "babel": "^5.8.21",
     "express": "^4.13.3",
     "express-graphql": "^0.2.0",
     "graphql": "^0.3.0",
