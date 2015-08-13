@@ -1,3 +1,23 @@
-export function getValue(path, fallback) {
-  console.log(fallback);
+const ENV = process.env.NODE_ENV || 'development';
+const envConfig = require(`../${ENV}.config`);
+const baseConfig = require('../defaults.config');
+
+const findValue = (parts, config) => parts.reduce((memo, part) => {
+  if (memo && memo[part]) {
+    return memo[part];
+  } else {
+    return false;
+  }
+}, config);
+
+export function getValue(path) {
+  const parts = path.split('.');
+
+  let value = findValue(parts, envConfig);
+
+  if (!value) {
+    value = findValue(parts, baseConfig);
+  }
+
+  return value;
 }
