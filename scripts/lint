@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+`npm bin`/eslint \
+  --format 'node_modules/eslint-friendly-formatter' \
+  ./src \
+  ./data \
+  ./test \
+  ./webpack
