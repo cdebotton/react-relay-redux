@@ -3,7 +3,7 @@
 This is not a functional kit yet, too many todos to mention. Some key points are:
 
 - React View Layer
-- Redux for managing application state (w/ Redux Devtools, ~~fun~~ <3)
+- Redux for managing application state (w/ Redux Devtools, fun~~ <3)
 - Relay for managing network interactions
 - GraphQL on top of Sequelize for managing the data layer
 - koajs for serving the application
