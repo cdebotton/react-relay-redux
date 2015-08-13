@@ -1,0 +1,6 @@
+node_modules
+
+.DS_Store
+._*
+thumbs.db
+npm-debug.log
