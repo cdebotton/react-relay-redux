@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "scripts/lint",
+    "lint:watch": "scripts/lint-watch",
     "test": "scripts/test"
   },
   "author": "Christian de Botton <debotton@brooklynunited.com>",
@@ -15,6 +17,7 @@
     "babel-loader": "^5.3.2",
     "babel-relay-plugin": "^0.1.1",
     "chai": "^3.2.0",
+    "colors": "^1.1.2",
     "concurrently": "^0.1.1",
     "css-loader": "^0.16.0",
     "eslint": "^1.1.0",
@@ -23,6 +26,7 @@
     "eslint-plugin-react": "^3.2.2",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
+    "gaze": "^0.5.1",
     "json-loader": "^0.5.2",
     "mocha": "^2.2.5",
     "react-hot-loader": "^1.2.8",

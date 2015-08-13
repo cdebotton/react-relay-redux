@@ -4,4 +4,4 @@ require('babel/register')({
   optional: ['runtime'],
 });
 
-require('./src/server');
+module.exports = require('./webpack');
