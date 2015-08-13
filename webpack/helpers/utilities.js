@@ -5,9 +5,9 @@ const baseConfig = require('../defaults.config');
 const findValue = (parts, config) => parts.reduce((memo, part) => {
   if (memo && memo[part]) {
     return memo[part];
-  } else {
-    return false;
   }
+
+  return false;
 }, config);
 
 export function getValue(path) {
