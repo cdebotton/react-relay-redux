@@ -1,7 +1,7 @@
 export function WriteStatsPlugin({target, publicPath}) {
-  return function() {
+  return function writeStats() {
     this.plugin('done', () => {
-
+      console.log(target, publicPath);
     });
   };
 }
