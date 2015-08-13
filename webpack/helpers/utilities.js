@@ -1,3 +1,3 @@
-export function getValue(path, ...configs) {
-  console.log(configs);
+export function getValue(path, fallback) {
+  console.log(fallback);
 }

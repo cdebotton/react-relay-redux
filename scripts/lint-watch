@@ -16,23 +16,26 @@ var dirs = [
 ];
 
 function lint() {
+  process.stdout.write(colors.yellow('Linting...') + '\n');
   var linter = spawn('./scripts/lint', [], {stdio: 'inherit'});
 
   if (linter.stdout) {
     linter.stdout.on('data', function(data) {
-      process.stdout.write(data);
+      process.stdout.write(data + '\n');
     });
   }
 
   if (linter.stderr) {
     linter.stderr.on('data', function(data) {
-      process.stderr.write(data);
+      process.stderr.write(data + '\n');
     });
   }
 
   linter.on('exit', function(code) {
     if (code === 0) {
-      process.stdout.write(colors.green('✓ 0 problems (0 errors, 0 warnings)\n'));
+      process.stdout.write(
+        colors.green('✓ 0 problems (0 errors, 0 warnings)\n\n')
+      );
     }
   });
 }
