@@ -1,0 +1,28 @@
+#!/usr/bin/env node_modules/.bin/babel-node --stage=0
+
+import gaze from 'gaze';
+import path from 'path';
+import {spawn} from 'child_process';
+import {yellow, green} from 'colors';
+
+const compile = () => {
+  process.stdout.write(yellow('Compiling GraphQL Schema...') + '\n');
+  const compiler = spawn('npm', ['run', 'relay-schema'], {stdio: 'inherit'});
+
+  if (compiler.stdout) {
+    compiler.stdout.on('data', (data) => {
+      process.stdout.write(data + '\n');
+    });
+  }
+
+  if (compiler.stderr) {
+    compiler.stderr.on('data', (data) => {
+      process.stderr.write(data + '\n');
+    });
+  }
+}
+
+gaze(path.join(__dirname, '..', 'data', '**', '*.js'), function() {
+  this.on('all', (event, pathname) => compile());
+  compile();
+});

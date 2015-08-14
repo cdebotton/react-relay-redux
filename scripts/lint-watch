@@ -1,49 +1,44 @@
-#!/usr/bin/env node
+#!/usr/bin/env node_modules/.bin/babel-node --stage=0
 
-var gaze = require('gaze');
-var colors = require('colors');
-var path = require('path');
-var spawn = require('child_process').spawn;
+import gaze from 'gaze';
+import {green, yellow} from 'colors';
+import path from 'path';
+import {spawn} from 'child_process';
 
-var APP_ROOT = path.join(__dirname, '..');
-var JS_EXT = path.join('**', '*.js');
+const APP_ROOT = path.join(__dirname, '..');
+const JS_EXT = path.join('**', '*.js');
 
-var dirs = [
+const dirs = [
   path.join(APP_ROOT, 'src', JS_EXT),
   path.join(APP_ROOT, 'test', JS_EXT),
   path.join(APP_ROOT, 'data', JS_EXT),
   path.join(APP_ROOT, 'webpack', JS_EXT),
 ];
 
-function lint() {
-  process.stdout.write(colors.yellow('Linting...') + '\n');
-  var linter = spawn('./scripts/lint', [], {stdio: 'inherit'});
+const lint = () => {
+  process.stdout.write(yellow('Linting...') + '\n');
+  const linter = spawn('./scripts/lint', [], {stdio: 'inherit'});
 
   if (linter.stdout) {
-    linter.stdout.on('data', function(data) {
+    linter.stdout.on('data', (data) => {
       process.stdout.write(data + '\n');
     });
   }
 
   if (linter.stderr) {
-    linter.stderr.on('data', function(data) {
+    linter.stderr.on('data', (data) => {
       process.stderr.write(data + '\n');
     });
   }
 
-  linter.on('exit', function(code) {
+  linter.on('exit', (code) => {
     if (code === 0) {
-      process.stdout.write(
-        colors.green('✓ 0 problems (0 errors, 0 warnings)\n\n')
-      );
+      process.stdout.write(green('✓ 0 problems (0 errors, 0 warnings)\n\n'));
     }
   });
 }
 
 gaze(dirs, function(filepath) {
-  this.on('all', function(event, filepath) {
-    lint();
-  });
-
+  this.on('all', (event, filepath) => lint());
   lint();
 });

@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-export function WriteStatsPlugin({target, publicPath}) {
+export function WriteStatsPlugin({target}) {
   return function writeStats() {
     this.plugin('done', (stats) => {
       const json = stats.toJson();
@@ -17,7 +17,7 @@ export function WriteStatsPlugin({target, publicPath}) {
         const ext = path.extname(chunk).match(/\.(.+)$/)[1];
 
         memo[ext] = memo[ext] || [];
-        memo[ext].push(publicPath + chunk);
+        memo[ext].push(chunk);
 
         return memo;
       }, {});

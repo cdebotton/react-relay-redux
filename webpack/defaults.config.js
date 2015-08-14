@@ -38,7 +38,6 @@ export default {
     }),
     new WriteStatsPlugin({
       target: path.join(__dirname, '..', 'build', 'webpack-stats.json'),
-      publicPath: '/build/',
     }),
   ],
   babel: {

@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+`npm bin`/concurrent \
+  --kill-others \
+  "npm run webpack:watch" \
+  "npm run server:watch" \
+  "npm run start:development" \
+  "npm run relay-schema:watch"

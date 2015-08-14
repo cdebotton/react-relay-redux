@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+NODE_ENV=development \
+  `npm bin`/supervisor \
+    --extensions js,jade,json \
+    --harmony \
+    ./index.js

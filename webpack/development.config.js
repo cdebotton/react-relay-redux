@@ -3,7 +3,7 @@ import path from 'path';
 import {WriteStatsPlugin} from './helpers/plugins';
 
 const WEBPACK_PORT = process.env.WEBPACK_PORT || 3001;
-const PUBLIC_PATH = `http://localhost:${WEBPACK_PORT}`;
+const PUBLIC_PATH = `http://localhost:${WEBPACK_PORT}/`;
 
 export default {
   name: 'Development',
@@ -38,7 +38,6 @@ export default {
     }),
     new WriteStatsPlugin({
       target: path.join(__dirname, '..', 'build', 'webpack-stats.json'),
-      publicPath: PUBLIC_PATH,
     }),
   ],
 };
