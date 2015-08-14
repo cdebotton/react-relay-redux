@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+NODE_ENV=production \
+  `npm bin`/forever \
+    start \
+      --append \
+      --log "react-relay-redux" \
+      --uid "production" \
+      -c "node --harmony" \
+      ./index.js

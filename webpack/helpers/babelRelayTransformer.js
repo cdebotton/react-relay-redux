@@ -3,7 +3,7 @@ import getBabelRelayPlugin from 'babel-relay-plugin';
 let data;
 
 try {
-  ({data} = require('../../data/schema.json'));
+  ({data} = require('../../build/schema.json'));
 } catch (ex) {
   data = {};
 }

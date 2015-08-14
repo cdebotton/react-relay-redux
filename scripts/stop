@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+NODE_ENV=production \
+  `npm bin`/forever \
+    stop \
+      "production"

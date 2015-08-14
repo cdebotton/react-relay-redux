@@ -4,6 +4,7 @@ export default class Layout extends Component {
   static propTypes = {
     js: PropTypes.array,
     css: PropTypes.array,
+    markup: PropTypes.string,
   }
 
   static defaultProps = {
@@ -39,7 +40,9 @@ export default class Layout extends Component {
         {styles}
       </head>
       <body>
-        <div id="mount" />
+        <div
+          id="mount"
+          dangerouslySetInnerHTML={{__html: this.props.markup}} />
         {scripts}
       </body>
       </html>

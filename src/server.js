@@ -9,7 +9,11 @@ import graphqlHTTP from 'express-graphql';
 import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
+import Relay from 'react-relay';
+import {Router} from 'react-router';
+import Location from 'react-router/lib/Location';
 import {green, red} from 'colors';
+import Application from './containers/Application';
 import Layout from './views/Layout';
 
 const ENV = process.env.NODE_ENV || 'development';
@@ -59,6 +63,31 @@ app.use(function* render() {
     stats = {};
     console.error(red('Could not find webpack-stats.json'));
   }
+
+  // let markup;
+  // try {
+  //   const routerProps = yield new Promise((resolve, reject) => {
+  //     const location = new Location(this.req.url);
+  //     const routes = require('../build/routes-compiled');
+  //     Router.run(routes, location, (err, initialState) => {
+  //       if (err) {
+  //         return reject(err);
+  //       }
+
+  //       resolve(initialState);
+  //     });
+  //   });
+
+  //   const router = (
+  //     <Router {...routerProps} />
+  //   );
+
+  //   markup = ReactDOM.renderToString(
+  //     <Application router={router} />
+  //   );
+  // } catch (ex) {
+  //   markup = '';
+  // }
 
   const html = ReactDOM.renderToStaticMarkup(
     <Layout
