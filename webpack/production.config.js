@@ -18,5 +18,9 @@ export default {
         NODE_ENV: 'production',
       }),
     }),
+    new WriteStatsPlugin({
+      target: path.join(__dirname, '..', 'build'),
+      publicPath: '/build/',
+    }),
   ],
 };

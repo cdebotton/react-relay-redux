@@ -16,6 +16,7 @@
     "babel-eslint": "^4.0.5",
     "babel-loader": "^5.3.2",
     "babel-relay-plugin": "^0.1.1",
+    "babel-runtime": "^5.8.20",
     "chai": "^3.2.0",
     "colors": "^1.1.2",
     "concurrently": "^0.1.1",
