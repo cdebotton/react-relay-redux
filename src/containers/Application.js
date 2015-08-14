@@ -50,18 +50,17 @@ export default class Application extends Component {
                     route={new RelayRoute()} />
                 );
               }
-              else {
-                console.error(
-                  `ERROR: Path ${props.route.path} does not match any ` +
-                  `Relay Rouetes`
-                );
-                return false;
-              }
-            } else {
-              return (
-                <Route {...props} />
+
+              console.error(
+                `ERROR: Path ${props.route.path} does not match any ` +
+                `Relay Rouetes`
               );
+
+              return false;
             }
+            return (
+              <Route {...props} />
+            );
           }}
           children={routes}
           history={this.props.history} />

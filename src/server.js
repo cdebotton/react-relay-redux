@@ -9,11 +9,11 @@ import graphqlHTTP from 'express-graphql';
 import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Relay from 'react-relay';
-import {Router} from 'react-router';
-import Location from 'react-router/lib/Location';
+// import Relay from 'react-relay';
+// import {Router} from 'react-router';
+// import Location from 'react-router/lib/Location';
 import {green, red} from 'colors';
-import Application from './containers/Application';
+// import Application from './containers/Application';
 import Layout from './views/Layout';
 
 const ENV = process.env.NODE_ENV || 'development';
