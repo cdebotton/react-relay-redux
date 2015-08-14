@@ -1,4 +1,6 @@
 import webpack from 'webpack';
+import path from 'path';
+import {WriteStatsPlugin} from './helpers/plugins';
 
 export default {
   name: 'Production',
@@ -19,7 +21,7 @@ export default {
       }),
     }),
     new WriteStatsPlugin({
-      target: path.join(__dirname, '..', 'build'),
+      target: path.join(__dirname, '..', 'build', 'webpack-stats.json'),
       publicPath: '/build/',
     }),
   ],

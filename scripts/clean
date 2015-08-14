@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+`npm bin`/rimraf \
+  ./public/build/* \
+  ./build/*

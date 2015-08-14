@@ -1,6 +1,5 @@
 import path from 'path';
-import getBabelRelayPlugin from 'babel-relay-plugin';
-import {data} from '../../data/schema.json';
+import fs from 'fs';
 
 export function WriteStatsPlugin({target, publicPath}) {
   return function writeStats() {
@@ -29,8 +28,4 @@ export function WriteStatsPlugin({target, publicPath}) {
       );
     });
   };
-}
-
-export function babelRelayPlugin() {
-  return getBabelRelayPlugin(data);
 }

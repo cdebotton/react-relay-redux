@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "scripts/clean",
+    "prebuild": "npm run clean -s && npm run relay:schema -s",
+    "build": "scripts/build",
     "lint": "scripts/lint",
     "lint:watch": "scripts/lint-watch",
+    "relay:schema": "scripts/relay-schema",
     "test": "scripts/test"
   },
   "author": "Christian de Botton <debotton@brooklynunited.com>",
@@ -32,6 +36,7 @@
     "mocha": "^2.2.5",
     "nib": "^1.1.0",
     "react-hot-loader": "^1.2.8",
+    "rimraf": "^2.4.2",
     "rupture": "^0.6.1",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0",

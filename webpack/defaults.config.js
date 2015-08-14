@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
-import {babelRelayPlugin} from './helpers/plugins';
+import {WriteStatsPlugin} from './helpers/plugins';
 
 export default {
   name: 'Webpack',
@@ -11,7 +11,7 @@ export default {
     bundle: path.join(__dirname, '..', 'src', 'client.js'),
   },
   output: {
-    path: path.join(__dirname, '..', 'public'),
+    path: path.join(__dirname, '..', 'public', 'build'),
     publicPath: '/build/',
     filename: '[hash].js',
     chunkFilename: '[chunkhash].js',
@@ -36,12 +36,16 @@ export default {
         NODE_ENV: process.env.NODE_ENV || 'development',
       }),
     }),
+    new WriteStatsPlugin({
+      target: path.join(__dirname, '..', 'build', 'webpack-stats.json'),
+      publicPath: '/build/',
+    }),
   ],
   babel: {
     stage: 0,
     loose: ['all'],
     optional: ['runtime'],
-    plugins: [babelRelayPlugin()],
+    plugins: [path.join(__dirname, 'helpers', 'babelRelayTransformer.js')],
   },
   stylus: {
     use: [
