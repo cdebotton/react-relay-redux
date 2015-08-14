@@ -2,82 +2,93 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLSchema,
+  GraphQLList,
 } from 'graphql';
 
 import {
-  nodeDefinitions,
+  connectionArgs,
+  connectionDefinitions,
+  connectionFromArray,
   fromGlobalId,
   globalIdField,
+  nodeDefinitions,
 } from 'graphql-relay';
 
-let __lastId = 0;
-class User extends Object {}
+import {
+  resolver,
+  attributeFields,
+} from 'graphql-sequelize';
 
-const getUser = () => {
-  const user = new User();
+import {User} from './models';
 
-  user.id = `USER_${++__lastId}`;
-  user.firstName = 'Christian';
-  user.email = 'admin@react-relay-redux.com';
-
-  return user;
-};
+class Viewer extends Object {}
+const getViewer = () => new Viewer();
 
 const {nodeInterface, nodeField} = nodeDefinitions(
   (globalId) => {
-    const {type} = fromGlobalId(globalId);
+    const {id, type} = fromGlobalId(globalId);
 
     switch (type) {
     case 'User':
-      return userType; // eslint-disable-line
+      return User.findById(id);
+    case 'Viewer':
+      return getViewer();
     default:
       return null;
     }
   },
   (obj) => {
-    if (obj instanceof User) {
-      return getUser();
+    if (obj instanceof Vewer) {
+      return viewerType;
+    } else if (obj instanceof User) {
+      return userType; // eslint-disable-line
     }
 
     return null;
   },
 );
-
 const userType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
+    ...attributeFields(User),
     id: globalIdField('User'),
-    firstName: {
-      type: GraphQLString,
-      description: 'The user\'s first name.',
-    },
-    email: {
-      type: GraphQLString,
-      description: 'The user\'s first name.',
-    },
   }),
-  interface: [nodeInterface],
+  interfaces: [nodeInterface],
+});
+
+const {connectionType: userConnection} = connectionDefinitions({
+  name: 'User',
+  nodeType: userType,
+});
+
+const viewerType = new GraphQLObjectType({
+  name: 'Viewer',
+  fields: () => ({
+    users: {
+      type: userConnection,
+      args: connectionArgs,
+      resolve: async (_, args) => connectionFromArray(
+        await User.findAll({
+          limit: args.first,
+        }),
+        args
+      ),
+    }
+  }),
+  interfaces: [nodeInterface],
 });
 
 const queryType = new GraphQLObjectType({
-  name: 'Root Query',
-  node: nodeField,
+  name: 'RootQuery',
   fields: () => ({
-    user: {
-      type: userType,
-      resolve: () => getUser(),
-    },
-  }),
-});
-
-const mutationType = new GraphQLObjectType({
-  name: 'Root Mutation',
-  fields: () => ({
-
+    node: nodeField,
+    viewer: {
+      type: viewerType,
+      resolve: () => getViewer(),
+    }
   }),
 });
 
 export default new GraphQLSchema({
   query: queryType,
-  mutation: mutationType,
 });
