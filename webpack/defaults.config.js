@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
-import {BabelRelayPlugin} from './helpers/plugins';
+import {babelRelayPlugin} from './helpers/plugins';
 
 export default {
   name: 'Webpack',
@@ -41,7 +41,7 @@ export default {
     stage: 0,
     loose: ['all'],
     optional: ['runtime'],
-    plugins: [BabelRelayPlugin],
+    plugins: [babelRelayPlugin()],
   },
   stylus: {
     use: [

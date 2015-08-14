@@ -1,11 +1,36 @@
+import path from 'path';
+import getBabelRelayPlugin from 'babel-relay-plugin';
+import {data} from '../../data/schema.json';
+
 export function WriteStatsPlugin({target, publicPath}) {
   return function writeStats() {
-    this.plugin('done', () => {
-      console.log(target, publicPath);
+    this.plugin('done', (stats) => {
+      const json = stats.toJson();
+      let chunks = json.assetsByChunkName.bundle;
+
+      if (!Array.isArray(chunks)) {
+        chunks = [chunks];
+      }
+
+      const assets = chunks.filter((chunk) => {
+        return ['.js', '.css'].indexOf(path.extname(chunk)) > -1;
+      }).reduce((memo, chunk) => {
+        const ext = path.extname(chunk).match(/\.(.+)$/)[1];
+
+        memo[ext] = memo[ext] || [];
+        memo[ext].push(publicPath + chunk);
+
+        return memo;
+      }, {});
+
+      fs.writeFileSync(
+        target,
+        JSON.stringify(assets, null, 2)
+      );
     });
   };
 }
 
-export function BabelRelayPlugin() {
-
+export function babelRelayPlugin() {
+  return getBabelRelayPlugin(data);
 }
