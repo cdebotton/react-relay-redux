@@ -1,5 +1,9 @@
 # Universal React Relay Redux
 
+## Deprecated
+
+I'm no longer maintaining this repository. Please take a look at [cdebotton/react-universal](http://www.github.com/cdebotton/react-universal).
+
 This is not a functional kit yet, too many todos to mention. Some key points are:
 
 - React View Layer
